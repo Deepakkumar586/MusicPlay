@@ -49,6 +49,7 @@ nav .circle{
     font-size: 14px;
     margin-top: 4px;
     color: #333;
+    margin-bottom: 4px;
 }
 #progress{
     /* throw webkit range is like dumb */
