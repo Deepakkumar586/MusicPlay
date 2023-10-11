@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/335f15d685.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+        <img src="media/music.png" alt="music-image" class="music-img">
+        <h1>Tum Bin</h1>
+        <p>Ft. Arijit Singh</p>
+
+            <audio controls  id="song" src="media/song.mp3" >
+              
+            </audio>
+            
+
+            <input type="range" value="0" id="progress">
+
+            <div class="controls">
+                <div>
+                    <i class="fa-solid fa-backward-fast"></i>
+                </div>
+                <div  onclick="playPause()">
+                    <i class="fa-solid fa-play" id="controlIcon"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-forward-fast"></i>
+                </div>
+            </div>
+
+
+      </div>
+    </div>
+
+    <script>
+        let progerss  = document.getElementById("progress");
+        let song  = document.getElementById("song");
+        let controlIcon  = document.getElementById("controlIcon");
+
+        //<!-- anonymous function -->
+        song.onloadedmetadata = function(){
+            progerss.max = song.duration;
+            progerss.value = song.currentTime;
+        }
+
+        function playPause(){
+            if(controlIcon.classList.contains("fa-pause")){
+                song.pause();
+                controlIcon.classList.remove("fa-pause");
+                controlIcon.classList.add("fa-play");
+
+            }
+            else{
+                song.play();
+                controlIcon.classList.add("fa-pause");
+                controlIcon.classList.remove("fa-play");
+                
+            }
+        }
+
+        if(song.play()){
+            setInterval(()=>{
+                progerss.value = song.currentTime;
+            },500);
+        }
+        progerss.onchange = function(){
+            song.play();
+            song.currentTime = progerss.value;
+            controlIcon.classList.add("fa-pause");
+            controlIcon.classList.remove("fa-play")
+        }
+        
+    </script>
+  </body>
+
+  
+</html>
